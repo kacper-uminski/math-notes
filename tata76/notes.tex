@@ -1,0 +1,278 @@
+\documentclass[a4paper,12pt]{article}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5ex} 
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\partialfrac}[2]{\frac{\partial #1}{\partial #2}}
+
+\usepackage[includeheadfoot,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+
+
+
+\title{TATA76 - Föreläsningsanteckningar}
+\author{Kacper Uminski}
+\date{}
+
+\begin{document}
+\begin{titlepage}
+  \clearpage
+  \maketitle
+  \thispagestyle{empty}
+\end{titlepage}
+\section{Rummet $\mathbb{R}^n$, Grundbegrepp, och Funktioner av Flera Variabler}
+\section{Gränsvärden och Kontinuitet}
+\section{Differentierbarhet och Partiella Derivator}
+Kom ihåg från envariabelanalysen att
+$f'(a) = lim_{h \to 0}\frac{f(a+h)-f(a)}{h}$.
+
+$f'(a)$ är lutningen hos tangenten i punkten $(a,f(a))$
+\subsection{Flera Variabler}
+Låt $z=f(x,y)$. Fixera $y=b$, det vill säga studera $z=f(x,b)$. När x varierar
+beskriver detta samband en kurva och vi definierar
+\begin{equation}
+  f'_x(a,b) = lim_{h \to 0}\frac{f(a+h,b)-f(a,b)}{h}
+\end{equation}
+$f'_x(a,b)$ blir lutningen i $x$-led i punkten (a,b,f(a,b)).
+
+Detta betecknas $f'_x, \partialfrac{f}{x}, D_xf$. Krokiga $\partial$
+markerar att f beror av \textit{flera} variabler. Raka $d$ markerar att $f$
+beror av \textit{en} variabel.
+
+På motsvarande sätt, om vi fixerar $x=a$ och låter $y$ variera, definieras
+\begin{equation*}
+  f'_y(a,b) = lim_{k \to 0}\frac{f(a,b+k)-f(a,b)}{k}
+\end{equation*}
+Detta betecknas $f'_y, \partialfrac{f}{y}, D_yf$, och beskriver
+lutningen i $y$-led.
+
+Av definitionen framgår att räkneregler för derivator ser ut som förr. Deriverar
+man med avseende på en variabel, så är alla andra variabler konstanta.
+
+\begin{itemize}
+\item[\textbf{Ex.1}]
+  \begin{equation*}
+    f(x,y,z) = xy^2z^3 \Rightarrow 
+    \begin{cases}
+      \partialfrac{f}{x}=y^2z^3\\ \\
+      \partialfrac{f}{y}=2xyz^3\\ \\
+      \partialfrac{f}{z}=3xy^2z^2
+    \end{cases}
+  \end{equation*}
+\item[\textbf{Ex.2}]
+  \begin{equation*}
+    f(x,y)=ye^{xy}+sin(x^2+2y) \Rightarrow
+    \begin{cases}
+      \partialfrac{f}{x} = y^2e^{xy}+2xcos(x^2+2y) \\ \\
+      \partialfrac{f}{y} = (1+xy)e^{xy}+2cos(x^2+2y)
+    \end{cases}\\
+  \end{equation*}
+\item[\textbf{OBS}]
+  Om f är en funktion av två variabler, så har grafen till f inte \textit{en}
+  lutning. Lutningen beror på åt vilket håll man tittar.
+\item[\textbf{Def}]
+  Om de partiella derivatorna $(f'_x, f'_y, etc)$ är kontinuerliga så sägs $f$
+  vara av klass $C^1$.
+\item[\textbf{Påst}]
+  Alla elementära funktioner och sammansättningar, summor, produkter och kvoter
+  av sådana är kontinuerliga (och de är av klass $C^1,C^2,C^3,...$).
+\item[\textbf{OBS}]
+  I envariabelanalysen gäller att om $f$ är deriverbar så är $f$ kontinuerlig.
+  Detta gäller \textit{inte} i flervariabelanalys.
+\item[\textbf{Ex.3}]
+  \begin{equation*}
+    f(x,y) =
+    \begin{cases}
+      \frac{xy}{x^2+y^2}, (x,y)\neq(0,0) \\
+      0, (x,y)=(0,0)
+    \end{cases}
+  \end{equation*}
+\end{itemize}
+
+\section{Kedjeregeln och Partiella Differentialekvationer}
+\section{Tangentplan, Gradient, och Riktningsderivata}
+\subsection{Gradient}
+Om $f=f(x,y)$ har kontinuerliga partiella derivator (eg: f differentierbar)
+så definieras $\nabla f$ (gradienten av $f$) som
+\begin{equation*}
+  \nabla f = \begin{pmatrix}
+               f'_x\\
+               f'_y
+             \end{pmatrix}
+\end{equation*}
+
+\begin{itemize}
+\item[\textbf{Ex.1}]
+  \begin{equation*}
+    f(x,y,z) = ln(x^2+y)+e^{yz} \Rightarrow \nabla f =
+    \begin{pmatrix}
+      \partialfrac{f}{x}\\\\
+      \partialfrac{f}{y}\\\\
+      \partialfrac{f}{z}
+    \end{pmatrix}
+  \end{equation*}
+  OBS: $\nabla f$ är en vektor.
+\end{itemize}
+
+\subsection{Tangent till en kurva}
+Låt $\Gamma$ vara en kurva i planet (eller rummet), som ges av
+$(x,y) = (x(t),y(t)) = \vec{\phi}(t)$. En tangent till $\Gamma$ söks.
+Titta i $t$ och i $t+h$:
+\begin{equation*}
+  lim_{h \to 0}\frac{\vec{\phi}(t+h)-\vec{\phi}(t)}{h}
+\end{equation*}
+Om gränsvärdet finns, $\neq\vec{0}$; så kommer vi att få tangentvektor till
+kurvan, $\vec{\phi}'(t) = (x'(t),y'(t))$.
+
+\begin{itemize}
+\item[\textbf{Ex.2}]
+  Bestäm ekvationen för linjen som tangerar kurvan $(x,y,z) = (t, t^2, t^3)$ i
+  punkten där $t = -1$.
+
+  \textbf{Lösning:} $t = -1$ ger $(x,y,z) = (-1,1,-1)$ En tangentvektor fås som
+  \begin{equation*}
+    \begin{pmatrix}
+      x'(t)\\
+      y'(t)\\
+      z'(t)
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      1 \\
+      2t \\
+      3t^2
+    \end{pmatrix}
+    \stackrel{t = -1}{=}
+    \begin{pmatrix}
+      1 \\
+      -2 \\
+      -3
+    \end{pmatrix}
+  \end{equation*}
+
+  Så tangentens ekvation är
+
+  \begin{equation*}
+    \begin{pmatrix}
+      x \\
+      y \\
+      z
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      -1 \\
+      1 \\
+      -1
+    \end{pmatrix}
+    + t
+    \begin{pmatrix}
+      1 \\
+      -2 \\
+      3
+    \end{pmatrix}, t \in \mathbb{R}
+  \end{equation*}
+\end{itemize}
+
+  Betrakta en nivåyta, $f(x,y,z) = C$ och låt $\Gamma$ vaa en kurva på denna
+  yta. $\Gamma$ ges av $(x,y,z)=(x(t),y(t),z(t))$. Längs denna kurva är alltså
+  $f(x(t), y(t), z(t)) = C$. Derivera med avseende på $t$, så fås
+  $\frac{df}{dt}=0$ men
+  \begin{equation*}
+    \frac{df}{dt} =
+    \partialfrac{f}{x} \frac{dx}{dt} +
+    \partialfrac{f}{y} \frac{dy}{dt} +
+    \partialfrac{f}{z} \frac{dz}{dt} =
+    \begin{pmatrix}
+      \partialfrac{f}{x} \\\\
+      \partialfrac{f}{y} \\\\
+      \partialfrac{f}{z}
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+      \frac{dx}{dt} \\\\
+      \frac{dy}{dt} \\\\
+      \frac{dz}{dt}
+    \end{pmatrix}
+    = \nabla f \cdot \vec{\phi}'(t) = 0
+  \end{equation*}
+  Men $\overline{\phi}$ ligger i ytan, så $\vec{\phi}'$ är tangentvektor
+  till ytan och detta gäller alla kurvor i ytan. Alltså är $\nabla f$ vinkelrät
+  mot alla vektorer som tangerar ytan, då $\nabla f$ är en normalvektor till
+  nivåytan $f = C$.
+
+\begin{itemize}
+\item[\textbf{Ex.3}]
+  Sök tangentplanet till ytan $z = x^2+y^2$ i punkten $(-1,1)$. $x=-1, y=1$ ger
+  $z=2$. Skriv om ytan som nivåyta.
+  \begin{equation*}
+    z=x^2+y^2 \Leftrightarrow F(x,y,z) = x^2+y^2-z = 0
+    \Rightarrow \nabla F =
+    \begin{pmatrix}
+      2x \\
+      2y \\
+      -1
+    \end{pmatrix}
+  \end{equation*}
+
+  Så $\nabla F$ är en normal till ytan (i varje punkt på ytan) speciellt i givna
+  punkten är $(x,y,z)=(-1,1,2)$ så $\nabla F = (-2, 2, -1)$ och $(x,y,z)$ ligger
+  i planet omm \\$(-2,2,-1) \cdot (x+1, y-1, z-2) = 0$ det vill säga
+  $-2x+2y-z = 2$.
+\end{itemize}
+
+\subsection{Riktningsderivata}
+Låt $z = f(x,y)$. Studera $z$ då $(x,y) = (a_1,a_2)+t(v_1,v_2)$ (beskriver en
+linje i planet, genom $(a_1,a_2)$, riktning $(v_1, v_2)$) där
+$|\vec{v}| = |(v_1, v_2)| = 1$. Då definieras
+\begin{equation*}
+  f'_{\vec{v}}(\vec{a}) =
+  lim_{t \to 0}\frac{f(\vec{a}+t\vec{v})-f(\vec{a})}{t}
+\end{equation*} om gränsvärdet finns.
+
+\begin{itemize}
+\item[\textbf{OBS:}] 
+  Om $\vec{v} = \hat{x}$ så är $f'_{\vec{v}}(\vec{a}) = f'_x(\vec{a})$. Samma
+  sak gäller i $y$-led.
+\item[\textbf{OBS:}]
+  Låt $h(t) = f(\vec{a}+t\vec{v}) = f(\vec{g}(t))$, där
+  $\vec{g}(t)=\vec{a}+t\vec{v}$. Då fås
+
+  \begin{equation*}
+    \frac{\vec{f}(\vec{a}+t\vec{v})-f(\vec{a})}{t} = \frac{h(t)-h(0)}{t}
+    \to h'(0), t \to \vec{0}
+  \end{equation*}
+  men
+  \begin{align*}
+    h'(0) \stackrel{kedjeregeln}{= } & \nabla f(\vec{g}(0)) \cdot \vec{g}'(0) \\
+    = & \nabla f(\vec{a}) \cdot \vec{g}'(0) \\
+    = & \nabla f(\vec{a}) \cdot \vec{v}, |\vec{v}|=1
+  \end{align*}
+
+  Således blir $f'_{\vec{v}} = \nabla f(\vec{a})\cdot \hat{v}$ om $f$
+  differentierbar.
+\item[\textbf{OBS:}]
+  $f'_{\vec{v}}(\vec{a})=\nabla f(\vec{a}) \cdot \hat{v} =
+  |\nabla f(\vec{a})||\hat{v}|cos\alpha$, där $cos\alpha$ antar alla värden i
+  $[-1,1]$. Så max ($|\vec{v}|=1$) $f'_{\vec{v}}(\vec{a})=|\nabla f(\vec{a})|$
+  när $\alpha = 0$ och min $f'_{\vec{v}}(\vec{a})=-|\nabla f(\vec{a})|$ när
+  $\alpha = -\pi$.
+\item[\textbf{Alltså:}]
+  Om $z=f(x,y)$ är en funktionsyta så pekar $\nabla f$ ut den riktning i
+  $xy$-planet, där funktionen växer snabbast.
+\end{itemize}
+
+Vi har två tolkningar av gradient:
+\begin{itemize}
+\item Funktionsyta, $z = f(x,y)$. $\nabla f(\vec{a})$ pekar ut riktning i
+  $xy$-planet där funktionen växer fortast.
+\item Nivåyta, $F(x,y,z)=C$. $\nabla F(a,b,c)$ är normal till ytan.
+\end{itemize}
+\end{document}
+
+\section{Kurvor, Ytor, och Funktionsdeterminanter}
+\section{Dubbelintegraler}
+\section{Variabelbyte i dubbelintegraler}
+\section{Trippelintegraler}
+\section{Integraltillämpningar}
