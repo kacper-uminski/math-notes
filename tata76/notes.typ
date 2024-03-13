@@ -13,11 +13,11 @@
     fill: luma(230),
     inset: 8pt,
     radius: 4pt,
-    align(left,[
+    align(left)[
 	*#title*
 
 	#txt
-    ])
+    ]
 ))
 
 #let example(num, txt) = [#titled_block([Exempel #num], [#txt])]
@@ -26,8 +26,8 @@
 
 
 #set document(title: [#title], author: "Kacper Uminski")
-
-#set text(size: 12pt, font: "IBM Plex Serif")
+#set text(size: 12pt, font: "Computer Modern")
+#set heading(numbering: "1.")
 
 #align(center, text(17pt)[
   *#title*
@@ -65,20 +65,21 @@
     Observera att om $f$ är en funktion av två variabler, så har grafen till
     $f$ inte _en_ lutning. Lutningen beror på åt vilket håll man tittar.
 
-    #example(1,
-      $ f(x,y,z) = x y^2 z^3 => cases(
-	  pdv(f,x) = x^2 z^3,
-	  pdv(f,y) = 2 x y z,
-	  pdv(f,z) = 3 x y^2 z^2,
-	  ) $
-    )
+    #example(1)[
+	$ f(x,y,z) = x y^2 z^3 => cases(
+	    pdv(f,x) = x^2 z^3,
+	    pdv(f,y) = 2 x y z,
+	    pdv(f,z) = 3 x y^2 z^2,
+	    ) $
+    ]
+    
 
-    #example(2,
-      $ f(x,y) = y e^(x y)+sin(x^2+2y) => cases(
-	  pdv(f,x) = y^2e^(x y)+2x cos(x^2+2y),
-	  pdv(f,y) = (1+x y)e^(x y)+2cos(x^2+2y),
-	  ) $
-    )
+    #example(2)[
+	$ f(x,y) = y e^(x y)+sin(x^2+2y) => cases(
+	    pdv(f,x) = y^2e^(x y)+2x cos(x^2+2y),
+	    pdv(f,y) = (1+x y)e^(x y)+2cos(x^2+2y),
+	    ) $
+    ]
 
     Om de partiella derivatorna $(f'_x, f'_y, ...)$ är kontinuerliga så sägs
     $f$ vara av klass $C^1$, eller $f in C^1$. Alla elementära funktioner och
@@ -88,19 +89,19 @@
     Observera att i envariabelanalysen så gäller det att om $f$ är deriverbar
     så är $f$ kontinuerlig. Detta gäller _inte_ i flervariabelanalysen.
 
-    #example(3,
-    $ f(x,y) = cases(
-	(x y)/(x^2+y^2)\, (x,y) != (0,0),
-	0\, (x,y) = (0,0)
-	) $
-    )
+    #example(3)[
+	$ f(x,y) = cases(
+	    (x y)/(x^2+y^2)\, (x,y) != (0,0),
+	    0\, (x,y) = (0,0)
+	    ) $
+    ]
 
 = Kedjeregeln och Partiella Differentialekvationer
   Kom ihåg från envariabelanalysen att $D(f(g(x))) = f'(g(x)) dot g'(x)$,
   eller med $t = g(x)$ så fås $f(g(x)) = f(t)$ och
   $dv(f,x) = dv(f,t) dot dv(t,x)$.
 
-  #example(1, [
+  #example(1)[
       Betrakta Eulerekvationen $x^2y''-2x y'+2y = 2x^2, x>0$
 
       Byt variabel, $x = e^t$, det vill säga $t = ln x$: $
@@ -124,7 +125,7 @@
 
       Alltså blir $dv(y,t,2)-3dv(y,t)+2y = 2e^(2t)$, som har lösningarna
       $y = A e^t+B e^(2t)-2t e^(2t) = A x+B x^2-2x^2ln x$
-  ])
+  ]
   == Kedjeregeln i flera variabler
     Vi förbereder med att titta på Tangentplan.
 
@@ -146,10 +147,10 @@
     $dv(z,t) = pdv(f,x) dot dv(x,t) + pdv(f,y) dot dv(y,t)$, eller med
     $f=f(x,y)$ så fås $dv(f,t) = pdv(f,x) dot dv(x,t) + pdv(f,y) dot dv(y,t)$.
 
-    #example(2,[
+    #example(2)[
 	Låt $f(u,v) = v sin(u v)$ där $u=x^2, v=3x$. Då är:
 	$f = 3x sin(3x^3)$. Kedjeregeln ger $dv(f,x)=$
-    ])
+    ]
 
 = Tangentplan, Gradient, och Riktningsderivata
   == Gradient
@@ -157,10 +158,10 @@
     så definieras $grad f$ (gradienten av $f$) som
     $ grad f = mat(f'_x; f'_y) $
 
-    #example(1,[
+    #example(1)[
 	$ f(x,y,z) = ln(x^2+y)+e^(y z) => grad f = mat(pdv(f,x); pdv(f,y); pdv(f,z)) $
 	Observera att $grad f$ är en _vektor_
-    ])
+    ]
     
   == Tangent till kurva
     Låt $Gamma$ vara en kurva i planet (eller rummet), som ges av
@@ -171,7 +172,7 @@
     Om gränsvärdet finns, $!= va(0)$, så kommer vi att få tangentvektorn till
     kurvan, $va(phi)'(t) = (x'(t),y'(t))$.
 
-    #example(2, [
+    #example(2)[
 	Bestäm ekvationen för linjen som tangerar kurvan
 	$(x,y,z) = (t, t^2, t^3)$ i punkten där $t = -1$.
 
@@ -181,7 +182,7 @@
 	
 	Så tangentens ekvation är
 	$ mat(x; y; z) = mat(-1; 1; -1) + t mat(1; -2; 3), t in RR $
-    ])
+    ]
 
     Betrakta en nivåyta, $f(x,y,z) = C$ och låt $Gamma$ vara en kurva på denna
     yta. $Gamma$ ges av $(x,y,z)=(x(t),y(t),z(t))$. Längs denna kurva är alltså
@@ -197,7 +198,7 @@
     vektorer som tangerar ytan, då $grad f$ är en normalvektor till nivåytan
     $f=C$.
 
-    #example(3,[
+    #example(3)[
 	Sök tangentplanet till ytan $z = x^2+y^2$ i punkten $(-1,1)$.
 
 	$x=-1, y=1 => z=2$.
@@ -210,7 +211,7 @@
 	givna punkten är $(x,y,z)=(-1,1,2)$ så $grad F = (-2,2,-1)$ och
 	$(x,y,z)$ ligger i planet omm $(-2,2,-1) dot (x+1, y-1, z-2) = 0$, det
 	vill säga $-2x+2y-z = 2$.
-    ])
+    ]
 
   == Riktningsderivata
     Låt $z = f(x,y)$. Studera $z$ då $(x,y) = (a_1,a_2)+t(v_1,v_2)$ (beskriver en
@@ -260,7 +261,7 @@
   $(s_0,t_0)$, fås av:
   $ va(n) = pdv(va(r),s)(s_0,t_0) times pdv(va(r),t)(s_0,t_0) $
 
-  #example(1, [
+  #example(1)[
       Bestäm tangentplanet till ytan
       $ cases(
 	  x & = & 2sin theta cos phi,
@@ -272,7 +273,7 @@
       i punkten $va(r) = (x,y,z) = (0,3,0)$
 
       Vi bestämmer $phi$ och $theta$ i denna punkt.
-  ])
+  ]
 
 
 = Dubbelintegraler
@@ -293,17 +294,17 @@
     tolkas som volymen mellan $x y$-planet och ytan $z=f(x,y)$, där
     $(x,y) in D$.
 
-    #theorem([], [
+    #theorem([])[
 	Om $D={(x,y) | x in [a,b], y in [c,d]}$ och $f$ är kontinuerlig på $D$
 	så är
 	$ integral.double_D f(x,y) dd(x,y) = integral_a^b (integral_c^d f(x,y)
 	    dd(y))dd(x) $
-    ])
+    ]
 
     Observera att integralen inom parentesen är "arean" på en skiva för ett
     fixt $x$. $dd(x)$ är i detta sammanhang "tjockleken" av skivan.
 
-    #example(1, [
+    #example(1)[
 	$ & integral.double_D x/(1+x y)^2dd(x,y) \
 	    & D={(x,y) | x in [1,4], y in [0,1]} $
 
@@ -315,17 +316,17 @@
 	    & = [x-ln|1+x|]_1^4 = \
 	    & = 4-ln 5-(1-ln 2) \
 	    & = 3-ln 5/2 $
-    ])
+    ]
 
     Mer allmänna områden, $D = {(x,y) | x in [a,b], y in [phi(x), psi(x)]}$, ger
     $ integral.double_D f(x,y)dd(x,y) =
 	integral_a^b (integral_phi(x)^psi(x) f(x,y) dd(y))dd(x) $
     Observera att gränserna fortfarande är konstanta på den yttre integralen.
     
-    #example(2, [
+    #example(2)[
 	$ integral.double_D (x^2+y^2)dd(x,y) $ där $D$ är en triangel med hörn i
 	$(0,0), (1,0), (1,2)$. Området kan beskrivas på två sätt:
-	#enum([
+	#enum()[
 	    Integrera med avseende på $y$ först. (Ska ha konstanta gränser på
 	    $x$.) Detta ger $x in [0,1]$. För varje fixt $x$ fås $y in [0,2x]$.
 	    Därav blir:
@@ -344,10 +345,10 @@
 		& = integral_0^2 (integral_(y/2)^1 (x^2+y^2)dd(x))dd(y) \
 		& = ... \
 		& = 7/6 $
-	])
-    ])
+	]
+    ]
 
-    #example(3, [
+    #example(3)[
 	$ integral.double_D (x+2y)dd(x,y) $ Där $D$ är enhetscirkeln. Området
 	kan beskrivas som
 	$D = {(x,y) | x in [-1,1], y in [-sqrt(1-x^2), sqrt(1-x^2)]}$. Vi får
@@ -359,9 +360,9 @@
 	    & = integral_(-1)^1 2x sqrt(1-x^2)dd(x) \
 	    & = [-2/3(1-x^2)^(3/2)]_(-1)^1 \
 	    & = 0 $
-    ])
+    ]
 
-    #example(4, [
+    #example(4)[
 	Beräkna $ integral_0^2 integral_y^2e^(x^2)dd(x,y) $ Rita först området.
 	Det blir en triangel med kanterna i $(0,0), (0,2), (2,2)$. Alltså blir
 	$D = {(x,y) | x in [0,2], y in [0,x]}$. Därav blir:
@@ -372,7 +373,7 @@
 	    & = integral_0^2 x e^(x^2)dd(x) \
 	    & = [1/2e^(x^2)]_0^2 \
 	    & = (e^4 -1)/2 $
-    ])
+    ]
 
     Ifall $f(x,y) = g(x) dot h(y)$ och om området är rektangeln
     $D = {(x,y) | x in [a,b], y in [c,d]}$ så erhålls:
@@ -398,7 +399,7 @@
   $abs(dv((u,v),(x,y)))$ den lokala ytskalan vid avbildning
   från $(x,y)$ till $(u,v)$.
 
-  #theorem([],[
+  #theorem([])[
       Om $x=x(u,v), y=y(u,v)$ är en omvändbar $C^1$-avbildning av $D'$ (i
       $u v$-planet) på $D$ (i $x y$-planet), sådan att
       $abs(dv((x,y),(u,v))) != 0$ i $D'$ så är
@@ -407,13 +408,13 @@
 	  underbrace(abs(dv((x,y),(u,v))),
 	  "Tar hand om\n area-ändringen")
 	  dd(u,v) $
-  ])
+  ]
 
   Jämför i med en variabel:
   $ integral_x(a)^x(b) f(x)dd(x) = \/ x=x(u), dd(x)=dv(x,u)dd(u)\/
       = integral_a^b f(x(u)) dot dv(x,u)dd(u) $
   
-  #example(1, [
+  #example(1)[
       Beräkna
       $ integral.double_D x/(x+2y)dd(x,y) \
 	  D = {(x,y) | 2x-y in [0,2], x+2y in [1,2]} $
@@ -437,9 +438,9 @@
       $ integral.double_(D') (2u+v)/5/v dot 1/5 dd(u,v)
 	  = 1/25 integral_1^2 integral_0^2 (2u/v+1)dd(u,v)
 	  = ... = 1/25 (4ln 2 + 2) $
-  ])
+  ]
 
-  #example(2, [
+  #example(2)[
       Beräkna
       $ integral.double_D e^(-(x^2+y^2))dd(x,y) \
 	  D = {(x,y) | x^2+y^2 in [1,3], y-x >= 0} $
@@ -460,7 +461,7 @@
 	  integral_1^(sqrt(3)) r e^(-r^2) dd(r) \
 	  = & pi [-1/2e^(-r^2)]_1^sqrt(3)
 	  = & pi/2(e^(-1)-e^(-3)) $
-  ])
+  ]
   
 = Trippelintegraler
   $ integral.triple_D f(x,y,z)dd(x,y,z) $
@@ -471,7 +472,7 @@
   - Om $f(x,y,z)=$ Densiteten i punkten $(x,y,z)$:
     $integral.triple_D f(x,y,z) =$ massan av $D$.
 
-  #theorem([],[
+  #theorem([])[
       Om $D = {(x,y) in D_0 | g(x,y) <= z <= h(x,y)}$ och $f$ är kontinuerlig,
       så är:
       $ integral.triple_D f(x,y,z)dd(x,y,z)
@@ -484,16 +485,16 @@
       $ integral.triple_D f(x,y,z)dd(x,y,z)
 	  = integral_a^b (integral_phi(x)^psi(x)(integral_g(x,y)^h(x,y)
 	      f(x,y,z)dd(z))dd(y))dd(x) $
-  ])
+  ]
 
-  #theorem([],[
+  #theorem([])[
       Om $D = {(x,y,z) | x in [a,b], (x,y) in D_z}$ så är:
       $ integral.triple_D f(x,y,z)dd(x,y,z)
 	  = integral_a^b (integral.double_(D_z)f(x,y,z)dd(x,y))dd(z) $
       Detta liknar skivformeln i envariabelanalysen.
-  ])
+  ]
 
-  #example(1, [
+  #example(1)[
       $ I = integral.triple_D x z e^(x y)dd(x,y,z) \
 	  D = {(x,y,z) | x,y in [0,1], z in [0,2]} $
       Vi får:
@@ -502,9 +503,9 @@
 	  & = integral_0^1 (integral_0^1 [(z^2)/2x e^(x y)]dd(y))dd(x) \
 	  & = ... \
 	  & = 2e-4 $
-  ])
+  ]
 
-  #example(2, [
+  #example(2)[
       Volymen av en tetraheder med hörn i $(0,0,0), (1,0,0), (0,1,0), (0,0,2)$.
       Börja med att sätta $D_0$ till projektionen av tetrahedern i $x y$-planet,
       som ges av triangeln $D_0 = {x in [0,1], y in [0, 1-x]}$. I $z$-ledd blir
@@ -515,9 +516,9 @@
 
       $ V = integral_0^1 (integral_0^(1-x)(integral_0^(2-2x-2y)1
 	  dd(z))dd(y))dd(x) = ... = 1/3 $
-  ])
+  ]
 
-  #example(3, [
+  #example(3)[
       Volymen av kroppen som ligger inom klotet $x^2+y^2+z^2 >= 1$ och ovanför
       konen $z = sqrt(x^2+y^2)$. Alternativ 1 är att projicera området där
       konen och klotet skär varandra på $x y$-planet och sätta $D_0$ till
@@ -535,7 +536,7 @@
 	  dot integral_0^(2pi) dd(phi) \
 	  & = 2pi dot [-1/3 (1-r^2)^(3/2)-(r^3)/3]_0^(1/sqrt(2)) \
 	  & = (2pi)/3 (1-1/sqrt(2)) $
-  ])
+  ]
 
   == Variabelbyte
     Variabelbyte i $integral.triple$ fungerar som i $integral.double$. Låt
@@ -553,7 +554,7 @@
 	= integral.triple_(D')f(x(u,v,w), y(u,v,w),z(u,v,w))
 	abs(dv((x,y,z),(u,v,w))) dd(u,v,w) $
 
-    #example(4, [
+    #example(4)[
 	Bestäm volymen av området
 	$ D = {(x,y,z) | x in [0,1], x+y+z in [0,2], x+y-z in [0,3]} $
 
@@ -572,7 +573,7 @@
 	$ V = integral.triple_D 1dd(x,y,z)
 	    = integral.triple_(D') 1 dot 1/2 dd(u,v,w)
 	    = 1/2 dot 1 dot 2 dot 3 = 3 $ 
-    ])
+    ]
 
   == Rymdpolära koordinater
     Sätt:
@@ -586,7 +587,7 @@
     
     
 = Integraltillämpningar
-  #example(1, [
+  #example(1)[
       Beräkna $integral.triple_D (x-y)dd(x)dd(y)dd(z)$ där $D$ är tetrahedern
       med hörn i $(0,0,0), (1,1,1), (1,1,0), (1,0,1)$.
 
@@ -637,7 +638,7 @@
 		  dd(w))dd(v)) dd(u)\
 	  = & ... \
 	  = & 1/24 $
-  ])
+  ]
 
   #example(2, [
       Berkäkna $integral.triple_D x^2 dd(x)dd(y)dd(z)$, där $D$ ges av
